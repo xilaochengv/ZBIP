@@ -1,0 +1,24 @@
+name: 直播IP扫描
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0,30 * * * *"
+jobs:
+  build:
+    name: 直播IP扫描
+    runs-on: ubuntu-latest
+    steps:
+    - name: 运行脚本
+      env:
+        REPO: ${{ secrets.REPO }}
+        TOKEN: ${{ secrets.TOKEN }}
+        SCRIPT_REPO: ${{ secrets.SCRIPT_REPO }}
+      run: curl -H "Authorization:token $TOKEN" -skL "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_scan.sh" | bash
+    - name: 上传到Release
+      uses: softprops/action-gh-release@v1
+      with:
+          files: |
+            scans
+            scan_done
+          tag_name: Latest
+          body: 直播IP更新与扫描
