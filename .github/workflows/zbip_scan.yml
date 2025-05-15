@@ -2,7 +2,7 @@ name: 直播IP扫描
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0,30 * * * *"
+    - cron: "0,30 * * * 1"
 jobs:
   build:
     name: 直播IP扫描
