@@ -1,6 +1,8 @@
 name: 直播IP扫描
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [直播IP扫描]
   schedule:
     - cron: "0,30 * * * *"
 jobs:
