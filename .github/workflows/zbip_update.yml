@@ -2,7 +2,7 @@ name: 直播IP更新
 on:
   workflow_dispatch:
   schedule:
-    - cron: "25,55 * * * *"
+    - cron: "25,55 * * * 1"
 jobs:
   build:
     name: 直播IP更新
