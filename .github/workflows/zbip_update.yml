@@ -2,7 +2,7 @@ name: 直播IP更新
 on:
   workflow_dispatch:
   schedule:
-    - cron: "25,55 * * * 1"
+    - cron: "25,55 * * * *"
 jobs:
   build:
     name: 直播IP更新
@@ -20,15 +20,8 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
           files: |
-            scans
-            zbip
-            zbip_need_to_update_cookie
+            iptv_scan
+            iptv_zbip
+            iptv_need_to_update_cookie
           tag_name: Latest
           body: 直播IP更新与扫描
-    - name: 收尾工作
-      env:
-        REPO: ${{ secrets.REPO }}
-        TOKEN: ${{ secrets.TOKEN }}
-      run: |
-        UPDATING_ID=$(curl -H "Authorization: token $TOKEN" -H "Accept: application/vnd.github.v3+json" -s https://api.github.com/repos/xilaochengv/$REPO/releases | jq -c '.[].assets[] | {id, name}' | grep updating | grep -oE "[0-9]{1,20}")
-        curl -X DELETE -H "Authorization: token $TOKEN" -s https://api.github.com/repos/xilaochengv/$REPO/releases/assets/$UPDATING_ID
