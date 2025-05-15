@@ -13,11 +13,3 @@ jobs:
         TOKEN: ${{ secrets.TOKEN }}
         SCRIPT_REPO: ${{ secrets.SCRIPT_REPO }}
       run: curl -H "Authorization:token $TOKEN" -skL "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_scan.sh" | bash
-    - name: 上传到Release
-      uses: softprops/action-gh-release@v1
-      with:
-          files: |
-            iptv_scan
-            iptv_scan_done
-          tag_name: Latest
-          body: 直播IP更新与扫描
