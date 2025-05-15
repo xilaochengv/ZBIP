@@ -1,6 +1,8 @@
 name: 直播IP更新
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [zbip_update]
   schedule:
     - cron: "25,55 * * * *"
 jobs:
