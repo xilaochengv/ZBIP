@@ -2,7 +2,7 @@ name: 直播IP扫描
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0,30 * * * 1"
+    - cron: "0,30 * * * *"
 jobs:
   build:
     name: 直播IP扫描
@@ -18,7 +18,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
           files: |
-            scans
-            scan_done
+            iptv_scan
+            iptv_scan_done
           tag_name: Latest
           body: 直播IP更新与扫描
