@@ -3,8 +3,6 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [直播IP更新]
-  schedule:
-    - cron: "25,55 * * * *"
 jobs:
   build:
     name: 直播IP更新
