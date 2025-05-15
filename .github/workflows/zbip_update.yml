@@ -10,18 +10,8 @@ jobs:
     steps:
     - name: 运行脚本
       env:
-        REPO: ${{ secrets.REPO }}
         PROXY: ${{ secrets.PROXY }}
         TOKEN: ${{ secrets.TOKEN }}
         COOKIES: ${{ secrets.COOKIES }}
         SCRIPT_REPO: ${{ secrets.SCRIPT_REPO }}
       run: curl -skLH "Authorization:token $TOKEN" "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_update.sh" | bash
-    - name: 上传到Release
-      uses: softprops/action-gh-release@v1
-      with:
-          files: |
-            iptv_scan
-            iptv_zbip
-            iptv_need_to_update_cookie
-          tag_name: Latest
-          body: 直播IP更新与扫描
