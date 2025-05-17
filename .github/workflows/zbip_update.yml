@@ -14,4 +14,7 @@ jobs:
         TOKEN: ${{ secrets.TOKEN }}
         COOKIES: ${{ secrets.COOKIES }}
         SCRIPT_REPO: ${{ secrets.SCRIPT_REPO }}
-      run: curl -skLH "Authorization:token $TOKEN" "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_update.sh" | bash
+      run: |
+        dcount=1 && curl -H "Authorization:token $TOKEN" -skLo zbip_update.sh "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_update.sh"
+        while [ "$?" != 0 -a $dcount -lt 3 ];do let dcount++;curl -H "Authorization:token $TOKEN" -skLo zbip_update.sh "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_update.sh";done
+        bash zbip_update.sh
