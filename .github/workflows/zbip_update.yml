@@ -17,4 +17,4 @@ jobs:
       run: |
         dcount=1 && curl -H "Authorization:token $TOKEN" -skLo zbip_update.sh "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_update.sh"
         while [ "$?" != 0 -a $dcount -lt 3 ];do let dcount++;curl -H "Authorization:token $TOKEN" -skLo zbip_update.sh "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_update.sh";done
-        bash -x zbip_update.sh
+        bash zbip_update.sh
