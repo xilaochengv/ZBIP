@@ -12,4 +12,7 @@ jobs:
       env:
         TOKEN: ${{ secrets.TOKEN }}
         SCRIPT_REPO: ${{ secrets.SCRIPT_REPO }}
-      run: curl -H "Authorization:token $TOKEN" -skL "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_scan.sh" | bash
+      run: |
+        dcount=1 && curl -H "Authorization:token $TOKEN" -skLo zbip_scan.sh "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_scan.sh"
+        while [ "$?" != 0 -a $dcount -lt 3 ];do let dcount++;curl -H "Authorization:token $TOKEN" -skLo zbip_scan.sh "https://raw.githubusercontent.com/xilaochengv/$SCRIPT_REPO/refs/heads/main/zbip_scan.sh";done
+        bash zbip_scan.sh
